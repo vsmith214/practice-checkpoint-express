@@ -39,4 +39,14 @@ describe('Todo model', function() {
       expect(todos.list('zeke')[0].complete).to.be.true
     })
   })
+  
+  describe('remove', function() {
+    it('removes a person\'s task', function() {
+       todos.add('zeke', { name: 'task 0' })
+       todos.add('zeke', { name: 'task 1' })
+       todos.add('zeke', { name: 'task 2' })
+       todos.remove('zeke', 1)
+       expect(todos.list('zeke')[1].name).to.equal('task 2')
+    })
+  })
 })

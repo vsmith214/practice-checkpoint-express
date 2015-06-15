@@ -15,7 +15,7 @@ module.exports = {
     todos[person][index].complete = true
   },
   list: function(person) {
-    return todos[person]
+    return todos[person] || []
   },
   listPeople: function() {
     return Object.keys(todos)

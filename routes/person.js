@@ -11,12 +11,15 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   todos.add(req.params.person, req.body)
+  res.status(201).end()
 })
 
 router.put('/:index', function(req, res, next) {
   todos.complete(req.params.person, Number(req.params.index))
+  res.status(201).end()
 })
 
 router.delete('/:index', function(req, res, next) {
   todos.remove(req.params.person, Number(req.params.index))
+  res.status(201).end()
 })
