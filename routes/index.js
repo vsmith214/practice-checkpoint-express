@@ -2,11 +2,6 @@ var express = require('express')
 var router = express.Router()
 module.exports = router
 
-var todos = require('../models/todos')
+// WRITE SOME ROUTES HERE
 
-// list all the people on the team
-router.get('/', function(req, res, next) {
-  res.json(todos.listPeople())
-})
-
-router.use('/:person', require('./person'))
+// FEEL FREE TO SPLIT INTO MULTIPLE FILES AS NEEDED
