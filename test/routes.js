@@ -80,7 +80,7 @@ describe('routes', function() {
         todos.add('david', {})
 
         return request
-          .delete('/david/1')
+          .delete('/david/2')
           .expect(201)
           .expect(function() {
             expect(todos.list('david')).to.have.length(2)
