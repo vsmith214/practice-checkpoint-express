@@ -78,7 +78,7 @@ describe('Todo routes', function() {
           })
       })
 
-      xit('can get only not completed tasks', function () {
+      xit('can get only active tasks', function () {
         return request
           .get('/billy?status=active')
           .expect(200)
