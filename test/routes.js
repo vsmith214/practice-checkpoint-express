@@ -118,5 +118,20 @@ describe('Todo routes', function() {
           })
       })
     })
+
+    describe('errors', function() {
+      xit('sends back a 404 if a user does not exist', function () {
+        return request
+          .get('/obama')
+          .expect(404)
+      })
+
+      xit('sends back a 400 if you attempt to add a todo with non-standard field', function () {
+        return request
+          .post('/bob')
+          .send({thisField: 'is neither `name` nor `complete` and so is not allowed'})
+          .expect(400)
+      })
+    })
   })
  })
