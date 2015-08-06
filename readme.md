@@ -24,9 +24,9 @@ The following resources are allowed:
 2. Clone this to your local machine.
 3. `npm install`
 4. You can run `npm test` which will continuously run the test suite upon file updates.
-5. Read through the project structure, you'll be primarily working in `models/todos.js` and  `routes/index.js` in that order. 
-7. Start working through the tests in `test/`.
-8. `git commit` often as you make progress on the tests.
+5. Read through the project structure, you'll be primarily working in `models/todos.js` and  `routes/index.js` in that order.
+6. Start working through the tests in `test/`. Make sure to change an `xit` to an `it` to change any given spec from pending to active.
+7. `git commit` often as you make progress on the tests.
 
 These tests include [supertest](https://github.com/visionmedia/supertest).
 
