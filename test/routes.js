@@ -57,7 +57,7 @@ describe('Todo routes', function() {
         .expect(function(res) {
           expect(res.body.name).to.equal('one of sarah\'s tasks')
           expect(todos.list('sarah')).to.have.length(1)
-          expect(todos.list('sarah').name).to.equal('one of sarah\'s tasks')
+          expect(todos.list('sarah')[0].name).to.equal('one of sarah\'s tasks')
         })
     })
 
