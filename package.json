@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --watch test/**.js", 
-    "grade": "testem ci -l PhantomJS -R tap"
+    "grade": "mocha --reporter spec --timeout 300 test/*test.js"
   },
   "author": "",
   "license": "ISC",
