@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --watch test/**.js"
+    "test": "mocha --watch test/**.js", 
+    "grade": "testem ci -l PhantomJS -R tap"
   },
   "author": "",
   "license": "ISC",
