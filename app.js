@@ -5,4 +5,4 @@ module.exports = app; //this line is only used to make testing easier
 
 // REMEMBER TO PLUGIN YOUR ROUTERS HERE!
 
-app.listen(process.env.PORT || 3000);
+if (!module.parent) app.listen(3000); // conditional to prevent an EADDRINUSE error. Very esoteric issue with mocha watch & supertest.
