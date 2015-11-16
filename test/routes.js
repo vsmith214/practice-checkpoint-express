@@ -23,7 +23,7 @@ describe('Todo routes', function() {
     });
 
     xit('responds with a person after a task has been added', function() {
-      todos.add('zeke', { name: 'a task' });
+      todos.add('zeke', { content: 'a task' });
       return request
         .get('/')
         .expect(200)
@@ -37,14 +37,14 @@ describe('Todo routes', function() {
 
   describe('/:person', function() {
     xit('lists tasks for a user with a get request', function() {
-      todos.add('bob', { name: 'task for bob' });
+      todos.add('bob', { content: 'task for bob' });
       return request
         .get('/bob')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function(res) {
           expect(res.body).to.have.length(1);
-          expect(res.body[0].name).to.equal('task for bob');
+          expect(res.body[0].content).to.equal('task for bob');
           expect(res.body[0].complete).to.equal(false);
         });
     });
@@ -52,20 +52,20 @@ describe('Todo routes', function() {
     xit('adds to the person\'s task list with a post request', function() {
       return request
         .post('/sarah')
-        .send({ name: 'one of sarah\'s tasks'})
+        .send({ content: 'one of sarah\'s tasks'})
         .expect(201)
         .expect(function(res) {
-          expect(res.body.name).to.equal('one of sarah\'s tasks');
+          expect(res.body.content).to.equal('one of sarah\'s tasks');
           expect(todos.list('sarah')).to.have.length(1);
-          expect(todos.list('sarah')[0].name).to.equal('one of sarah\'s tasks');
+          expect(todos.list('sarah')[0].content).to.equal('one of sarah\'s tasks');
         });
     });
 
     describe('filtering by status', function () {
       beforeEach(function () {
-        todos.add('billy', {name: 'learn about req.query'});
+        todos.add('billy', {content: 'learn about req.query'});
         todos.complete('billy', 0);
-        todos.add('billy', {name: 'enable requests for specific todos'});
+        todos.add('billy', {content: 'enable requests for specific todos'});
       });
 
       xit('can get only completed tasks', function () {
@@ -75,7 +75,7 @@ describe('Todo routes', function() {
           .expect('Content-Type', /json/)
           .expect(function(res) {
             expect(res.body).to.have.length(1);
-            expect(res.body[0].name).to.equal('learn about req.query');
+            expect(res.body[0].content).to.equal('learn about req.query');
           });
       });
 
@@ -86,7 +86,7 @@ describe('Todo routes', function() {
           .expect('Content-Type', /json/)
           .expect(function(res) {
             expect(res.body).to.have.length(1);
-            expect(res.body[0].name).to.equal('enable requests for specific todos');
+            expect(res.body[0].content).to.equal('enable requests for specific todos');
           });
       });
     });
@@ -129,7 +129,7 @@ describe('Todo routes', function() {
       xit('sends back a 400 if you attempt to add a todo with non-standard field', function () {
         return request
           .post('/bob')
-          .send({thisField: 'is neither `name` nor `complete` and so is not allowed'})
+          .send({thisField: 'is neither `content` nor `complete` and so is not allowed'})
           .expect(400);
       });
     });
