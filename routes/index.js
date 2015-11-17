@@ -1,7 +1,7 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 module.exports = router;
 
-// WRITE SOME ROUTES HERE
-
-// FEEL FREE TO SPLIT INTO MULTIPLE FILES AS NEEDED
+// write your routes here. Feel free to split into multiple files if you like.

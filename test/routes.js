@@ -1,4 +1,4 @@
-var request = require('supertest-as-promised')(require('../app'));
+var supertest = require('supertest-as-promised')(require('../app'));
 var expect = require('chai').expect;
 var todos = require('../models/todos');
 
@@ -12,7 +12,7 @@ describe('Todo routes', function() {
   describe('`/users` URI', function() {
     xit('GET responds with an empty array at first', function() {
       // when we make requests to `/users` we will get back an empty array
-      return request // supertest object lets us make & test HTTP req/res
+      return supertest // supertest object lets us make & test HTTP req/res
         .get('/users') // makes an HTTP request: GET '/users'
         .expect(200) // tests response status code
         .expect('Content-Type', /json/) // tests response header
@@ -23,7 +23,7 @@ describe('Todo routes', function() {
 
     xit('GET responds with a person after a task has been added', function() {
       todos.add('zeke', { content: 'a task' });
-      return request
+      return supertest
         .get('/users')
         .expect(200)
         .expect('Content-Type', /json/)
@@ -36,7 +36,7 @@ describe('Todo routes', function() {
       todos.add('zeke', { content: 'a task' });
       todos.add('omri', { content: 'some other task' });
       todos.add('gabe', { content: 'yet more tasks' });
-      return request
+      return supertest
         .get('/users')
         .expect(200)
         .expect('Content-Type', /json/)
@@ -53,7 +53,7 @@ describe('Todo routes', function() {
       todos.add('dave', { content: 'task 1 for dave' });
       todos.add('joe', { content: 'task 1 for joe' });
       todos.add('joe', { content: 'task 2 for joe' });
-      return request
+      return supertest
         .get('/users/joe')
         .expect(200)
         .expect('Content-Type', /json/)
@@ -67,9 +67,9 @@ describe('Todo routes', function() {
     });
 
     xit('POST creates a new task for that user & responds with the created task', function() {
-      return request
+      return supertest
         .post('/users/sarah')
-        .send({ content: 'a new task for sarah'})
+        .send({ content: 'a new task for sarah'}) // the HTTP request body
         .expect(201) // you'll have to customize the status yourself
         .expect('Content-Type', /json/)
         .expect(function(res) {
@@ -94,7 +94,7 @@ describe('Todo routes', function() {
       });
 
       xit('GET can get just the completed tasks', function () {
-        return request
+        return supertest
           .get('/users/billy?status=complete')
           .expect(200)
           .expect('Content-Type', /json/)
@@ -105,7 +105,7 @@ describe('Todo routes', function() {
       });
 
       xit('GET can get just the active (incomplete) tasks', function () {
-        return request
+        return supertest
           .get('/users/billy?status=active')
           .expect(200)
           .expect('Content-Type', /json/)
@@ -123,7 +123,7 @@ describe('Todo routes', function() {
         todos.add('nimit', { name: 't1' });
         todos.add('nimit', { name: 't2' });
 
-        return request
+        return supertest
           .put('/users/nimit/1')
           .expect(200)
           .expect(function() {
@@ -138,7 +138,7 @@ describe('Todo routes', function() {
         todos.add('david', { name: 'judge stackathon' });
         todos.add('david', { name: 'code review' });
 
-        return request
+        return supertest
           .delete('/users/david/1')
           .expect(204)
           .expect(function() {
@@ -152,15 +152,16 @@ describe('Todo routes', function() {
     describe('error handling', function() {
 
       xit('responds with a 404 if a user does not exist', function () {
-        return request
+        return supertest
           .get('/users/obama')
           .expect(404);
       });
 
       xit('responds with a 400 if you attempt to add a todo with non-standard field', function () {
-        return request
+        return supertest
           .post('/users/bob')
           .send({
+            content: 'is one of the allowed fields',
             wrong: 'is neither `content` nor `complete` and so is disallowed'
           })
           .expect(400);

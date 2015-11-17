@@ -1,5 +1,6 @@
-// BUILD A MODULE THAT PASSES THE TESTS IN THE MODEL TEST FILE
+'use strict';
 
+// build a module that passes the model test spec.
 module.exports = {
-  reset: function() {}
+  reset: function() {} // you will have to implement this yourself
 };

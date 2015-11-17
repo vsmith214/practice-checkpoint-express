@@ -15,8 +15,8 @@ The following resources are allowed:
 
 ## Things we're testing
 
-* Express App Structures 
-* Express Routing and Route Methods
+* Express app architecture 
+* Express routing
 
 ## Starting
 
@@ -24,7 +24,7 @@ The following resources are allowed:
 2. Clone this to your local machine.
 3. `npm install`
 4. You can run `npm test` which will continuously run the test suite upon file updates.
-5. Read through the project structure, you'll be primarily working in `models/todos.js` and  `routes/index.js` in that order.
+5. Read through the project structure, you'll be primarily working in `models/todos.js`, `routes/index.js`, and `app.js`.
 6. Start working through the tests in `test/`. Make sure to change an `xit` to an `it` to change any given spec from pending to active.
 7. `git commit` often as you make progress on the tests.
 
@@ -34,6 +34,7 @@ These tests include [supertest](https://github.com/visionmedia/supertest).
 
 As you complete each answer (or make an update), please commit the changes to the git repository.  To submit your answers:
 
-1.  Push your repository back to your own personal fork of `assessment-express-mongoose`.
-2.  Download the zip of your project from Github.
-3.  Email the zip with a link to your repository to `instructors+assessment@fullstackacademy.com` before the time assigned as the end of the assessment.
+1. Keep all specs active. 
+2. Push your repository back to your own personal fork of `assessment-express-mongoose`.
+3. Download the zip of your project from Github.
+4. Email the zip with a link to your repository to `instructors+assessment@fullstackacademy.com` before the time assigned as the end of the assessment.
