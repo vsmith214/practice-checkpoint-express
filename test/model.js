@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var Todos = require('../models/todos');
 describe('Todo model', function() {
 
-  // you must implement `reset` so every test starts with a clean slate.
+  // every test starts with a clean slate (see todos.js)
   beforeEach(function() {
     Todos.reset();
   });
