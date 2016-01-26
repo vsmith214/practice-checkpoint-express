@@ -119,9 +119,9 @@ describe('Todo routes', function() {
     describe('`/:index` URI', function() {
 
       xit('PUT marks a specific task as complete', function() {
-        todos.add('nimit', { name: 't0' });
-        todos.add('nimit', { name: 't1' });
-        todos.add('nimit', { name: 't2' });
+        todos.add('nimit', { content: 't0' });
+        todos.add('nimit', { content: 't1' });
+        todos.add('nimit', { content: 't2' });
 
         return supertest
           .put('/users/nimit/1')
@@ -134,17 +134,17 @@ describe('Todo routes', function() {
       });
 
       xit('DELETE removes a specific task', function() {
-        todos.add('david', { name: 'interview fellows' });
-        todos.add('david', { name: 'judge stackathon' });
-        todos.add('david', { name: 'code review' });
+        todos.add('david', { content: 'interview fellows' });
+        todos.add('david', { content: 'judge stackathon' });
+        todos.add('david', { content: 'code review' });
 
         return supertest
           .delete('/users/david/1')
           .expect(204)
           .expect(function() {
             expect(todos.list('david')).to.have.length(2);
-            expect(todos.list('david')[0].name).to.equal('interview fellows');
-            expect(todos.list('david')[1].name).to.equal('code review');
+            expect(todos.list('david')[0].content).to.equal('interview fellows');
+            expect(todos.list('david')[1].content).to.equal('code review');
           });
       });
     });
