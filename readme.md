@@ -35,6 +35,6 @@ These tests include [supertest](https://github.com/visionmedia/supertest).
 As you complete each answer (or make an update), please commit the changes to the git repository.  To submit your answers:
 
 1. Keep all specs active. 
-2. Push your repository back to your own personal fork of `express-assessment`.
+2. Push your repository back to your own personal fork.
 3. Download the zip of your project from Github.
 4. Email the zip with a link to your repository to `instructors+assessment@fullstackacademy.com` before the time assigned as the end of the assessment.
