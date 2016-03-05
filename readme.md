@@ -36,5 +36,5 @@ As you complete each answer (or make an update), please commit the changes to th
 
 1. Keep all specs active. 
 2. Push your repository back to your own personal fork.
-3. Download the zip of your project from Github.
-4. Email the zip with a link to your repository to `instructors+assessment@fullstackacademy.com` before the time assigned as the end of the assessment.
+3. Before the deadline, `git commit -am 'submission for deadline'`
+4. `git push`
