@@ -1,4 +1,4 @@
-# Assessment - Express
+# Checkpoint - Express
 
 Firstly, don't stress out that we will be using this test to judge you in any way except to understand how we can better help you.
 
