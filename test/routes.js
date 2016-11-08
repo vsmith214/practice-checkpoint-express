@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 var supertest = require('supertest-as-promised')(require('../app'));
 var expect = require('chai').expect;
 var todos = require('../models/todos');
@@ -47,14 +49,14 @@ describe('Todo routes', function() {
 
   });
 
-  describe('`/users/:name` URI', function() {
+  describe('`/users/:name/tasks` URI', function() {
 
     xit('GET lists all tasks for a specific user', function() {
       todos.add('dave', { content: 'task 1 for dave' });
       todos.add('joe', { content: 'task 1 for joe' });
       todos.add('joe', { content: 'task 2 for joe' });
       return supertest
-        .get('/users/joe')
+        .get('/users/joe/tasks')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function(res) {
@@ -68,7 +70,7 @@ describe('Todo routes', function() {
 
     xit('POST creates a new task for that user & responds with the created task', function() {
       return supertest
-        .post('/users/sarah')
+        .post('/users/sarah/tasks')
         .send({ content: 'a new task for sarah'}) // the HTTP request body
         .expect(201) // you'll have to customize the status yourself
         .expect('Content-Type', /json/)
@@ -95,7 +97,7 @@ describe('Todo routes', function() {
 
       xit('GET can get just the completed tasks', function () {
         return supertest
-          .get('/users/billy?status=complete')
+          .get('/users/billy/tasks?status=complete')
           .expect(200)
           .expect('Content-Type', /json/)
           .expect(function(res) {
@@ -106,7 +108,7 @@ describe('Todo routes', function() {
 
       xit('GET can get just the active (incomplete) tasks', function () {
         return supertest
-          .get('/users/billy?status=active')
+          .get('/users/billy/tasks?status=active')
           .expect(200)
           .expect('Content-Type', /json/)
           .expect(function(res) {
@@ -124,7 +126,7 @@ describe('Todo routes', function() {
         todos.add('nimit', { content: 't2' });
 
         return supertest
-          .put('/users/nimit/1')
+          .put('/users/nimit/tasks/1')
           .expect(200)
           .expect(function() {
             expect(todos.list('nimit')[0].complete).to.be.false;
@@ -139,7 +141,7 @@ describe('Todo routes', function() {
         todos.add('david', { content: 'code review' });
 
         return supertest
-          .delete('/users/david/1')
+          .delete('/users/david/tasks/1')
           .expect(204)
           .expect(function() {
             expect(todos.list('david')).to.have.length(2);
@@ -153,13 +155,13 @@ describe('Todo routes', function() {
 
       xit('responds with a 404 if a user does not exist', function () {
         return supertest
-          .get('/users/obama')
+          .get('/users/obama/tasks')
           .expect(404);
       });
 
       xit('responds with a 400 if you attempt to add a todo with non-standard field', function () {
         return supertest
-          .post('/users/bob')
+          .post('/users/bob/tasks')
           .send({
             content: 'is one of the allowed fields',
             wrong: 'is neither `content` nor `complete` and so is disallowed'

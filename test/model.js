@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 var expect = require('chai').expect;
 
 var Todos = require('../models/todos');
