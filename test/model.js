@@ -48,23 +48,34 @@ describe('Todo model', function() {
 
     xit('respects a pre-existing completion status', function() {
       Todos.add('zeke', { content: 'clean self', complete: true });
+      Todos.add('zeke', { content: 'clean the world', complete: false });
       expect(Todos.list('zeke')[0].complete).to.be.true;
+      expect(Todos.list('zeke')[1].complete).to.be.false;
     });
 
     xit("is a method that sets a specified task's `complete` property to true", function() {
       Todos.add('zeke', { content: 'go to store' });
-      Todos.complete('zeke', 0);
-      expect(Todos.list('zeke')[0].complete).to.be.true;
+      Todos.add('zeke', { content: 'go to library' });
+      Todos.add('zeke', { content: 'go to park' });
+      Todos.complete('zeke', 1);
+      expect(Todos.list('zeke')[0].complete).to.be.false;
+      expect(Todos.list('zeke')[1].complete).to.be.true;
+      expect(Todos.list('zeke')[2].complete).to.be.false;
     });
   });
 
   describe('`remove`', function() {
     xit('removes a task, by index, for a given person', function() {
-       Todos.add('zeke', { content: 'task 0' });
-       Todos.add('zeke', { content: 'task 1' });
-       Todos.add('zeke', { content: 'task 2' });
-       Todos.remove('zeke', 1);
-       expect(Todos.list('zeke')[1].content).to.equal('task 2');
+      // set up a bunch of tasks
+      for (let i = 0; i < 10; i++) Todos.add('zeke', { content: 'task ' + i });
+      expect(Todos.list('zeke').length).to.equal(10);
+      // use the method being tested
+      Todos.remove('zeke', 5);
+      // check the new state
+      expect(Todos.list('zeke').length).to.equal(9);
+      expect(Todos.list('zeke')[4].content).to.equal('task 4'); // nothing below 5 affected
+      expect(Todos.list('zeke')[5].content).to.equal('task 6'); // 5 was deleted
+      expect(Todos.list('zeke')[6].content).to.equal('task 7'); // everything moved down
     });
   });
 });
