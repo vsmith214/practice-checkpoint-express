@@ -53,7 +53,7 @@ describe('Todo routes', function() {
 
     xit('GET lists all tasks for a specific user', function() {
       todos.add('dave', { content: 'task 1 for dave' });
-      todos.add('joe', { content: 'task 1 for joe' });
+      todos.add('joe', { content: 'task 1 for joe', complete: true });
       todos.add('joe', { content: 'task 2 for joe' });
       return supertest
         .get('/users/joe/tasks')
@@ -62,7 +62,7 @@ describe('Todo routes', function() {
         .expect(function(res) {
           expect(res.body).to.have.length(2);
           expect(res.body[0].content).to.equal('task 1 for joe');
-          expect(res.body[0].complete).to.be.false;
+          expect(res.body[0].complete).to.be.true;
           expect(res.body[1].content).to.equal('task 2 for joe');
           expect(res.body[1].complete).to.be.false;
         });
@@ -83,6 +83,25 @@ describe('Todo routes', function() {
           expect(todos.list('sarah')[0]).to.eql({
             content: 'a new task for sarah',
             complete: false
+          });
+        });
+    });
+
+    xit('POST respects pre-existing completion status', function() {
+      return supertest
+        .post('/users/sarah/tasks')
+        .send({ content: 'a new task for sarah', complete: true}) // the HTTP request body
+        .expect(201) // you'll have to customize the status yourself
+        .expect('Content-Type', /json/)
+        .expect(function(res) {
+          expect(res.body).to.eql({
+            content: 'a new task for sarah',
+            complete: true
+          });
+          expect(todos.list('sarah')).to.have.length(1);
+          expect(todos.list('sarah')[0]).to.eql({
+            content: 'a new task for sarah',
+            complete: true
           });
         });
     });

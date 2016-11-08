@@ -41,12 +41,17 @@ describe('Todo model', function() {
   });
 
   describe('`complete`', function() {
-    xit('has a `complete` boolean set to false for any new tasks', function() {
+    xit('is a boolean set to `false` for any new tasks', function() {
       Todos.add('zeke', { content: 'clean self' });
       expect(Todos.list('zeke')[0].complete).to.be.false;
     });
 
-    xit("sets a specified task's `complete` property to true", function() {
+    xit('respects a pre-existing completion status', function() {
+      Todos.add('zeke', { content: 'clean self', complete: true });
+      expect(Todos.list('zeke')[0].complete).to.be.true;
+    });
+
+    xit("is a method that sets a specified task's `complete` property to true", function() {
       Todos.add('zeke', { content: 'go to store' });
       Todos.complete('zeke', 0);
       expect(Todos.list('zeke')[0].complete).to.be.true;
