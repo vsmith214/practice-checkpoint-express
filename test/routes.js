@@ -178,13 +178,10 @@ describe('Todo routes', function() {
           .expect(404);
       });
 
-      xit('responds with a 400 if you attempt to add a todo with non-standard field', function () {
+      xit('responds with a 400 if you attempt to add a todo without content', function () {
         return supertest
           .post('/users/bob/tasks')
-          .send({
-            content: 'is one of the allowed fields',
-            wrong: 'is neither `content` nor `complete` and so is disallowed'
-          })
+          .send({ content: '' })
           .expect(400);
       });
 
