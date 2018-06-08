@@ -9,13 +9,19 @@ module.exports = router;
 
 router.get('/', (req, res, next) => {
   res.json(todos.listPeople());
+  next();
+});
+
+router.post('/:name/tasks', (req, res, next) => {
+  if (req.body.content === '') res.sendStatus(400);
+  else {
+    let task = todos.add(req.params.name, req.body);
+    res.status(201).json(task);
+  }
 });
 
 router.get('/:name/tasks', (req, res, next) => {
   res.json(todos.list(req.params.name));
+  next();
 });
 
-router.post('/:name/tasks', (req, res, next) => {
-  todos.add(req.params.name, req.body);
-  res.json(todos.list.filter(task => task.content === req.body.content));
-})
